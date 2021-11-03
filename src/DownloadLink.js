@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect, useState, Component } from "react";
 import { Link } from "react-router-dom";
-
 import background from "./splashScreen.png";
 import logo from "./fitflex.png";
 import GradientButton from "react-linear-gradient-button";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
 
 const DownloadLink = () => {
+  useEffect(() => {
+    toast.success("Subscribed Successfully");
+    // setOpen(true);
+  }, []);
   return (
     <div
       style={{
@@ -21,10 +27,6 @@ const DownloadLink = () => {
         display: "flex",
         backgroundImage: `url(${background})`,
         backgroundColor: "rgba(0,0,0,0.9)",
-        // bg position is center and 0.9 is the opacity of the above color,
-        // bg image is imported as background and is sent to cover the whole screen, text color is set to white
-        // padding is 20 by default
-        // 100 vw means 100% of viewport width and 100vh means viewport height
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",

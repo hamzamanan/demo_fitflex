@@ -1,17 +1,18 @@
 import "./App.css";
 import "./style.css";
-import ReactDOM from "react-dom";
+import ReactDOM, { useLocation } from "react-dom";
 import GradientButton from "react-linear-gradient-button";
 import background from "./splashScreen.png";
 import React, { useEffect, useState, Component } from "react";
 import { BottomSheet } from "react-spring-bottom-sheet";
-// import OTPInput, { ResendOTP } from "otp-input-react";
+import { Link } from "react-router-dom";
 import OtpInput from "react-otp-input";
+import { otpVerify } from "./requests.js";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 
-function Otp() {
+function Otp(props) {
   const [counter, setCounter] = useState(60);
   useEffect(() => {
     counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
@@ -19,17 +20,25 @@ function Otp() {
   const [open, setOpen] = useState(false);
   useEffect(() => {
     toast.info("OTP sent to your number");
+    // console.log("THIS IS NUMBER", props);
+    var nmbr = props.location.state.Number;
+    console.log("Ths is msisdn", props.location.state.Number);
     setOpen(true);
   }, []);
   const [OTP, setOTP] = useState("");
 
   function handleClick() {
-    console.log("hi");
     {
       OTP === "1111"
         ? (document.location.href = "DownloadLink")
         : (document.location.href = "");
     }
+    const otpdetails = {
+      msisdn: "NDA=",
+      pin: OTP,
+    };
+    //
+    otpVerify(otpdetails).then();
   }
 
   return (
@@ -90,18 +99,20 @@ function Otp() {
             placeholder="1111"
             maxHeight="64px"
           />
-          <div
-            style={{
-              textAlign: "center",
-              color: "#ffffff",
-              fontWeight: "400",
-              fontSize: "18px",
-              marginBottom: "2vh",
-              marginLeft: -30,
-            }}
-          >
-            ResendOTP
-          </div>
+          <Link to="/GetNumber" textdecoration="none">
+            <div
+              style={{
+                textAlign: "center",
+                color: "#ffffff",
+                fontWeight: "400",
+                fontSize: "18px",
+                marginBottom: "2vh",
+                marginLeft: -30,
+              }}
+            >
+              ResendOTP
+            </div>
+          </Link>
         </div>
         <div
           style={{

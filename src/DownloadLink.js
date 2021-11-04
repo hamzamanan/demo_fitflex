@@ -39,7 +39,7 @@ const DownloadLink = () => {
         href="https://fitflexapp.com"
         style={{ fontSize: 30, color: "#0c7aff" }}
       >
-        https://fitflexapp.com
+        https://yourLink.com
       </a>
     </div>
   );

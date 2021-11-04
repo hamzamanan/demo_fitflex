@@ -1,26 +1,36 @@
 import "./App.css";
 import "./style.css";
 import background from "./splashScreen.png";
-// import background from "../assets/images/splashScreen.png";
+import { userSignup } from "./requests.js";
 import React, { useEffect, useState } from "react";
 import { BottomSheet } from "react-spring-bottom-sheet";
 import ReactCountryFlag from "react-country-flag";
 import GradientButton from "react-linear-gradient-button";
+import { Link } from "react-router-dom";
 
 function GetNumber() {
   const [data, setData] = useState(false);
-  function getPhone(e) {
-    var nmbr = e.target.value;
+  const [nmbr, setNmbr] = useState();
+  const [msdn, setMsdn] = useState();
 
+  function getPhone(e) {
+    var num = e.target.value;
+    setNmbr(num);
     {
-      nmbr === "03215371212" ? setData(true) : setData(false);
+      // num === "03216770180" ? setData(true) : setData(false);
     }
   }
   function handleClick() {
-    // toast("Wow so easy!");
-    {
-      data ? (document.location.href = "Otp") : (document.location.href = "");
-    }
+    // console.log(nmbr);
+    const user = {
+      msisdn: nmbr,
+    };
+    console.log(user);
+    userSignup(user).then((result) => {
+      setMsdn(result.data);
+      console.log(msdn);
+    });
+    // console.log(msdn);
   }
   const [open, setOpen] = useState(false);
   useEffect(() => {
@@ -30,7 +40,7 @@ function GetNumber() {
   return (
     <div style={container}>
       <BottomSheet open={open}>
-        <div style={signintext}>Sign in</div>
+        <div style={signintext}>Enter Your Number</div>
         <div
           style={{
             textAlign: "center",
@@ -57,7 +67,7 @@ function GetNumber() {
         >
           <ReactCountryFlag
             style={{ margin: "20px", width: "28px", height: "14px" }}
-            countryCode="AE"
+            countryCode="PK"
             svg
           />
           <p style={{ color: "#898989", fontSize: "20px", marginTop: "10px" }}>
@@ -92,25 +102,53 @@ function GetNumber() {
             marginBottom: 30,
           }}
         >
-          <GradientButton
-            gradient={["#4CCBF3", "#3BA3EE"]}
-            background="transparent"
-            borderRadius="14px"
-            color="#ffffff"
-            fontSize="18px"
-            fontWeight="400"
-            display="flex"
-            flexDirection="row"
-            justifyContent="center"
-            // paddingTop="90"
-            // position="absolute"
-            padding="15"
-            onClick={handleClick}
-            style={{ width: 374, height: 64, paddingTop: 8 }}
-            raised
-          >
-            Continue
-          </GradientButton>
+          {data ? (
+            <Link
+              to={{
+                pathname: "/otp",
+                state: { Number: msdn },
+              }}
+              style={{ textDecoration: "none" }}
+            >
+              <GradientButton
+                gradient={["#4CCBF3", "#3BA3EE"]}
+                background="transparent"
+                borderRadius="14px"
+                color="#ffffff"
+                fontSize="18px"
+                fontWeight="400"
+                display="flex"
+                flexDirection="row"
+                justifyContent="center"
+                padding="15"
+                onClick={handleClick}
+                style={{ width: 374, height: 64, paddingTop: 8 }}
+                raised
+              >
+                Continue
+              </GradientButton>
+            </Link>
+          ) : (
+            <Link to="/getnumber" style={{ textDecoration: "none" }}>
+              <GradientButton
+                gradient={["#4CCBF3", "#3BA3EE"]}
+                background="transparent"
+                borderRadius="14px"
+                color="#ffffff"
+                fontSize="18px"
+                fontWeight="400"
+                display="flex"
+                flexDirection="row"
+                justifyContent="center"
+                padding="15"
+                onClick={handleClick}
+                style={{ width: 374, height: 64, paddingTop: 8 }}
+                raised
+              >
+                Continue
+              </GradientButton>
+            </Link>
+          )}
         </div>
       </BottomSheet>
     </div>

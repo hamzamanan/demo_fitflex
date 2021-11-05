@@ -6,19 +6,17 @@ import React, { useEffect, useState } from "react";
 import { BottomSheet } from "react-spring-bottom-sheet";
 import ReactCountryFlag from "react-country-flag";
 import GradientButton from "react-linear-gradient-button";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function GetNumber() {
+  const history = useHistory();
   const [data, setData] = useState(false);
   const [nmbr, setNmbr] = useState();
   const [msdn, setMsdn] = useState();
-
+  // MjI= sir rao
   function getPhone(e) {
     var num = e.target.value;
     setNmbr(num);
-    {
-      // num === "03216770180" ? setData(true) : setData(false);
-    }
   }
   function handleClick() {
     // console.log(nmbr);
@@ -27,8 +25,7 @@ function GetNumber() {
     };
     console.log(user);
     userSignup(user).then((result) => {
-      setMsdn(result.data);
-      console.log(msdn);
+      history.push({ pathname: "/otp", state: { msis: result.data } });
     });
     // console.log(msdn);
   }
@@ -102,53 +99,31 @@ function GetNumber() {
             marginBottom: 30,
           }}
         >
-          {data ? (
+          {/* {data ? (
             <Link
               to={{
                 pathname: "/otp",
                 state: { Number: msdn },
               }}
               style={{ textDecoration: "none" }}
-            >
-              <GradientButton
-                gradient={["#4CCBF3", "#3BA3EE"]}
-                background="transparent"
-                borderRadius="14px"
-                color="#ffffff"
-                fontSize="18px"
-                fontWeight="400"
-                display="flex"
-                flexDirection="row"
-                justifyContent="center"
-                padding="15"
-                onClick={handleClick}
-                style={{ width: 374, height: 64, paddingTop: 8 }}
-                raised
-              >
-                Continue
-              </GradientButton>
-            </Link>
-          ) : (
-            <Link to="/getnumber" style={{ textDecoration: "none" }}>
-              <GradientButton
-                gradient={["#4CCBF3", "#3BA3EE"]}
-                background="transparent"
-                borderRadius="14px"
-                color="#ffffff"
-                fontSize="18px"
-                fontWeight="400"
-                display="flex"
-                flexDirection="row"
-                justifyContent="center"
-                padding="15"
-                onClick={handleClick}
-                style={{ width: 374, height: 64, paddingTop: 8 }}
-                raised
-              >
-                Continue
-              </GradientButton>
-            </Link>
-          )}
+            > */}
+          <GradientButton
+            gradient={["#4CCBF3", "#3BA3EE"]}
+            background="transparent"
+            borderRadius="14px"
+            color="#ffffff"
+            fontSize="18px"
+            fontWeight="400"
+            display="flex"
+            flexDirection="row"
+            justifyContent="center"
+            padding="15"
+            onClick={handleClick}
+            style={{ width: 374, height: 64, paddingTop: 8 }}
+            raised
+          >
+            Continue
+          </GradientButton>
         </div>
       </BottomSheet>
     </div>

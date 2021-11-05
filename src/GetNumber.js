@@ -13,7 +13,7 @@ function GetNumber() {
   const [data, setData] = useState(false);
   const [nmbr, setNmbr] = useState();
   const [msdn, setMsdn] = useState();
-  // MjI= sir rao
+  // "MjI=" sir raos key
   function getPhone(e) {
     var num = e.target.value;
     setNmbr(num);

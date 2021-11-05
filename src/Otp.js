@@ -7,8 +7,10 @@ import React, { useEffect, useState, Component } from "react";
 import { BottomSheet } from "react-spring-bottom-sheet";
 import { Link } from "react-router-dom";
 import OtpInput from "react-otp-input";
+import { FaDollarSign, FaRegCalendarAlt } from "react-icons/fa";
 import { otpVerify, userSignup } from "./requests.js";
 import { toast } from "react-toastify";
+
 import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 
@@ -63,44 +65,49 @@ function Otp(props) {
         }}
       >
         {" "}
-        <h1>Your Bundle</h1>
+        <h1 style={signintext}>Your Bundle</h1>
       </div>
       <div
         style={{
-          height: 300,
-          width: 300,
+          height: 250,
+          width: 250,
           border: "2px solid black",
           backgroundColor: "transparent",
           // opacity: 0.3,
           display: "flex",
           borderRadius: 14,
           // marginTop: 200,
-          marginLeft: "55px",
+          marginLeft: "75px",
+          padding: 10,
           justifyContent: "center",
           alignItems: "center",
         }}
       >
         <p
           style={{
-            fontSize: 28,
+            fontSize: 18,
             fontWeight: "bold",
             opacity: 1,
             width: 250,
             // padding: 20,
             textAlign: "center",
+            color: "#fff",
+            textShadow: "1px 1px #000",
           }}
         >
+          <FaDollarSign style={{ color: "#000", marginRight: 10 }} />
           Rp.100 with Tax
-          <br /> Validity: 1 Week
+          <br /> <FaRegCalendarAlt style={{ color: "#000", marginRight: 10 }} />
+          Validity: 1 Week
           <br />
           <p
             style={{
-              fontSize: 20,
-              fontWeight: "bold",
+              fontSize: 18,
+              // fontWeight: "bold",
               opacity: 1,
               width: 250,
-              color: "#43ff14",
-              opacity: 0.6,
+              // color: "#979797",
+              // opacity: 0.6,
               // padding: 20,
               textAlign: "center",
               textTransform: "capitalize",
@@ -111,12 +118,12 @@ function Otp(props) {
           </p>
           <p
             style={{
-              fontSize: 20,
+              fontSize: 18,
               fontWeight: "bold",
               opacity: 1,
               width: 250,
-              color: "#0c7aff",
-              opacity: 0.6,
+              color: "#fff",
+              // opacity: 0.6,
               // padding: 20,
               textAlign: "center",
               textTransform: "capitalize",

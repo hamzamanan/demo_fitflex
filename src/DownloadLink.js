@@ -8,10 +8,6 @@ import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 
 const DownloadLink = () => {
-  useEffect(() => {
-    toast.success("Subscribed Successfully");
-    // setOpen(true);
-  }, []);
   return (
     <div
       style={{
@@ -34,7 +30,11 @@ const DownloadLink = () => {
     >
       <img src={logo} style={{ width: 350, height: 300, marginTop: -100 }} />
       <h1>Welcome To Fitflex </h1>
+      <p style={{ fontSize: 25, marginBottom: -30 }}>
+        You've been charged Successfully{" "}
+      </p>
       <p style={{ fontSize: 25 }}>Your Download Link is :</p>
+
       <a
         href="https://fitflexapp.com"
         style={{ fontSize: 30, color: "#0c7aff" }}

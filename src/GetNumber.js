@@ -37,18 +37,18 @@ function GetNumber() {
   return (
     <div style={container}>
       <BottomSheet open={open}>
-        <div style={signintext}>Enter Your Number</div>
+        <div style={signintext}>Let's Start</div>
         <div
           style={{
             textAlign: "center",
             color: "#979797",
             display: "flex",
             justifyContent: "center",
-            paddingLeft: 33,
+            paddingLeft: 43,
             paddingRight: 49,
           }}
         >
-          We’ll text you a verification code. Message and data rates may apply.
+          Please Enter Your Number To Continue
         </div>
         <div
           style={{

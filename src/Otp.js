@@ -7,13 +7,14 @@ import React, { useEffect, useState, Component } from "react";
 import { BottomSheet } from "react-spring-bottom-sheet";
 import { Link } from "react-router-dom";
 import OtpInput from "react-otp-input";
-import { otpVerify } from "./requests.js";
+import { otpVerify, userSignup } from "./requests.js";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 
 function Otp(props) {
   const [counter, setCounter] = useState(60);
+  const [isDisable, setisDisable] = useState(false);
   useEffect(() => {
     counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
   }, [counter]);
@@ -30,14 +31,19 @@ function Otp(props) {
         msisdn: props.location.state.msis,
         pin: OTP,
       };
+      toast.info("Please wait while we verify");
+      setisDisable(true);
       OTP === "1111" && props.location.state.msis === "MjI="
         ? (document.location.href = "DownloadLink")
         : otpVerify(otpdetails).then((response) => {
             if (response.status === 200) {
               console.log("hi i am +ve");
               document.location.href = "DownloadLink";
-            } else {
+            } else if (response.status === 400) {
               console.log(" sorry i am negative", response.status);
+              alert("wrong otp");
+              setisDisable(false);
+              document.location.href = "getnumber";
             }
             // document.location.href = "getnumber";
           });
@@ -48,25 +54,79 @@ function Otp(props) {
 
   return (
     <div style={container}>
-      <div style={{ marginTop: 200 }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 100,
+        }}
+      >
         {" "}
+        <h1>Your Bundle</h1>
+      </div>
+      <div
+        style={{
+          height: 300,
+          width: 300,
+          border: "2px solid black",
+          backgroundColor: "transparent",
+          // opacity: 0.3,
+          display: "flex",
+          borderRadius: 14,
+          // marginTop: 200,
+          marginLeft: "55px",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <p
           style={{
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: "40px",
+            fontSize: 28,
             fontWeight: "bold",
-            textAlign: "center",
-            color: "#ffffff",
-            // position: "absolute",
-
             opacity: 1,
+            width: 250,
+            // padding: 20,
+            textAlign: "center",
           }}
         >
-          Charges Will Apply After you click Verify & Continue{" "}
-        </p>{" "}
+          Rp.100 with Tax
+          <br /> Validity: 1 Week
+          <br />
+          <p
+            style={{
+              fontSize: 20,
+              fontWeight: "bold",
+              opacity: 1,
+              width: 250,
+              color: "#43ff14",
+              opacity: 0.6,
+              // padding: 20,
+              textAlign: "center",
+              textTransform: "capitalize",
+            }}
+          >
+            {" "}
+            You Get Access To premium workout videos
+          </p>
+          <p
+            style={{
+              fontSize: 20,
+              fontWeight: "bold",
+              opacity: 1,
+              width: 250,
+              color: "#0c7aff",
+              opacity: 0.6,
+              // padding: 20,
+              textAlign: "center",
+              textTransform: "capitalize",
+            }}
+          >
+            Enter Otp To Continue
+          </p>
+        </p>
       </div>
-      <BottomSheet open={open}>
+      <BottomSheet open={open} blocking={false}>
         <div style={signintext}>Enter OTP</div>
 
         <div
@@ -140,6 +200,7 @@ function Otp(props) {
             color="#ffffff"
             fontSize="18px"
             fontWeight="400"
+            disabled={isDisable}
             position="absolute"
             style={{
               width: "374px",
@@ -171,6 +232,8 @@ const container = {
     alignItems: "center",
     justifyContent: "center",
     spacing: 8,
+    justifyContent: "center",
+    alignItems: "center",
   },
   otpfld = {
     margin: "5vw auto",

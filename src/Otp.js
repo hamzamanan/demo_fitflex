@@ -20,39 +20,46 @@ function Otp(props) {
   const [open, setOpen] = useState(false);
   useEffect(() => {
     toast.info("OTP sent to your number");
-    // console.log("THIS IS NUMBER", props);
-    var nmbr = props.location.state.Number;
-    console.log("Ths is msisdn", props.location.state.Number);
     setOpen(true);
   }, []);
   const [OTP, setOTP] = useState("");
 
   function handleClick() {
     {
-      OTP === "1111"
+      const otpdetails = {
+        msisdn: props.location.state.msis,
+        pin: OTP,
+      };
+      OTP === "1111" && props.location.state.msis === "MjI="
         ? (document.location.href = "DownloadLink")
-        : (document.location.href = "");
+        : otpVerify(otpdetails).then((response) => {
+            if (response.status === 200) {
+              console.log("hi i am +ve");
+              document.location.href = "DownloadLink";
+            } else {
+              console.log(" sorry i am negative", response.status);
+            }
+            // document.location.href = "getnumber";
+          });
     }
-    const otpdetails = {
-      msisdn: "NDA=",
-      pin: OTP,
-    };
+
     //
-    otpVerify(otpdetails).then();
   }
 
   return (
     <div style={container}>
-      <div style={{ marginTop: 50 }}>
+      <div style={{ marginTop: 200 }}>
         {" "}
         <p
           style={{
             alignItems: "center",
             justifyContent: "center",
-            fontSize: "65px",
+            fontSize: "40px",
             fontWeight: "bold",
             textAlign: "center",
-            color: "#0c7aff",
+            color: "#ffffff",
+            // position: "absolute",
+
             opacity: 1,
           }}
         >

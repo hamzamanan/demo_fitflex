@@ -65,7 +65,20 @@ function Otp(props) {
         }}
       >
         {" "}
-        <h1 style={signintext}>Your Bundle</h1>
+        <h1
+          style={{
+            fontSize: 36,
+            color: "#ffffff",
+            alignItems: "center",
+            justifyContent: "center",
+            // fontSize: "25px",
+            fontWeight: "bold",
+            textAlign: "center",
+            textShadow: "2px 2px #000",
+          }}
+        >
+          Your Bundle
+        </h1>
       </div>
       <div
         style={{
@@ -81,12 +94,13 @@ function Otp(props) {
           padding: 10,
           justifyContent: "center",
           alignItems: "center",
+          textShadow: "1px 1px #000",
         }}
       >
-        <p
+        <span
           style={{
             fontSize: 18,
-            fontWeight: "bold",
+            // fontWeight: "bold",
             opacity: 1,
             width: 250,
             // padding: 20,
@@ -95,26 +109,30 @@ function Otp(props) {
             textShadow: "1px 1px #000",
           }}
         >
-          <FaDollarSign style={{ color: "#000", marginRight: 10 }} />
-          Rp.100 with Tax
-          <br /> <FaRegCalendarAlt style={{ color: "#000", marginRight: 10 }} />
-          Validity: 1 Week
-          <br />
-          <p
-            style={{
-              fontSize: 18,
-              // fontWeight: "bold",
-              opacity: 1,
-              width: 250,
-              // color: "#979797",
-              // opacity: 0.6,
-              // padding: 20,
-              textAlign: "center",
-              textTransform: "capitalize",
-            }}
-          >
-            {" "}
-            You Get Access To premium workout videos
+          <p style={{ fontWeight: "bold" }}>
+            <FaDollarSign
+              style={{
+                color: "green",
+                height: 25,
+                width: 25,
+                marginRight: 40,
+                marginBottom: -5,
+              }}
+            />
+            Rs.100 with Tax
+          </p>
+
+          <p style={{ fontWeight: "bold" }}>
+            <FaRegCalendarAlt
+              style={{
+                color: "teal",
+                height: 25,
+                width: 25,
+                marginRight: 40,
+                marginBottom: -3,
+              }}
+            />
+            Validity: 1 Week
           </p>
           <p
             style={{
@@ -122,6 +140,7 @@ function Otp(props) {
               fontWeight: "bold",
               opacity: 1,
               width: 250,
+              textShadow: "1px 1px #000",
               color: "#fff",
               // opacity: 0.6,
               // padding: 20,
@@ -129,9 +148,27 @@ function Otp(props) {
               textTransform: "capitalize",
             }}
           >
-            Enter Otp To Continue
+            {" "}
+            You Get Access To Premium Workout Content.
           </p>
-        </p>
+          <br />
+          <p
+            style={{
+              fontSize: 18,
+              // fontWeight: "",
+              opacity: 1,
+              width: 250,
+              marginTop: -20,
+              color: "#fff",
+              // opacity: 0.6,
+              // padding: 20,
+              textAlign: "center",
+              textTransform: "capitalize",
+            }}
+          >
+            On OTP verification you will be charged
+          </p>
+        </span>
       </div>
       <BottomSheet open={open} blocking={false}>
         <div style={signintext}>Enter OTP</div>
@@ -229,7 +266,7 @@ function Otp(props) {
 
 const container = {
     backgroundImage: `url(${background})`,
-    backgroundColor: "rgba(0,0,0,0.7)",
+    backgroundColor: "rgba(0,0,0,0.9)",
     backgroundPosition: "center",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
